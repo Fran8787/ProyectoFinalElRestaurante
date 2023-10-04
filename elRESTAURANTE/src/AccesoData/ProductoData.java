@@ -18,7 +18,45 @@ public class ProductoData {
         con = Conexion.getConexion();
     }
 
-    public void guardarProducto(Producto producto) {
+   public void usuarioContraseña(String user, String pass) {
+    String sql = "SELECT `idMesero`, `nombre`, `apellido`, `usuario`, `contraseña`, `estado` FROM `mesero` WHERE `usuario` = ? AND `contraseña` = ?";
+
+    try {
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setString(1, user);
+        ps.setString(2, pass);
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) {
+            // Se encontró un registro con el usuario y contraseña proporcionados
+            int idMesero = rs.getInt("idMesero");
+            String nombre = rs.getString("nombre");
+            String apellido = rs.getString("apellido");
+            String usuario = rs.getString("usuario");
+            String contraseña = rs.getString("contraseña");
+            String estado = rs.getString("estado");
+
+            // Puedes utilizar los datos del mesero según tus necesidades
+            JOptionPane.showMessageDialog(null, "Inicio de sesión exitoso. Bienvenido, " + nombre + " " + apellido);
+        } else {
+            // No se encontró un registro con el usuario y contraseña proporcionados
+            JOptionPane.showMessageDialog(null, "Credenciales incorrectas. Por favor, inténtalo nuevamente.");
+        }
+
+        rs.close();
+        ps.close();
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Mesero: " + ex.getMessage());
+    }
+} 
+    
+    
+    
+    
+    
+    
+    
+ public void guardarProducto(Producto producto) {
         String sql = "INSERT INTO producto (nombre, categoria, precio, disponible, cantidad) VALUES (?, ?, ?, ?, ?)";
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -79,6 +117,7 @@ public class ProductoData {
                     rs.getInt("cantidad"),
                     rs.getInt("precio"),
                     rs.getInt("disponible")
+                       
                 );
                 producto.setIdProducto(rs.getInt("idProducto"));
                 productos.add(producto);

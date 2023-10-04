@@ -71,6 +71,11 @@ public class Producto {
     public void setDisponible(int disponible) {
         this.disponible = disponible;
     }
+
+    @Override
+    public String toString() {
+        return "Producto{" + "idProducto=" + idProducto + ", nombre=" + nombre + ", categoria=" + categoria + ", cantidad=" + cantidad + ", Precio=" + Precio + ", disponible=" + disponible + '}';
+    }
     
     
     
