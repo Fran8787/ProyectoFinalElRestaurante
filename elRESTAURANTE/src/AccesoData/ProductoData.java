@@ -28,6 +28,7 @@ public class ProductoData {
         ResultSet rs = ps.executeQuery();
 
         if (rs.next()) {
+            
             // Se encontró un registro con el usuario y contraseña proporcionados
             int idMesero = rs.getInt("idMesero");
             String nombre = rs.getString("nombre");
@@ -68,7 +69,7 @@ public class ProductoData {
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
-                producto.setIdProducto(rs.getInt("idProducto"));
+                producto.setIdProducto(rs.getInt(1));
                 JOptionPane.showMessageDialog(null, "Producto añadido con éxito.");
             }
             ps.close();
