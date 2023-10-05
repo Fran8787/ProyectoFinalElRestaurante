@@ -29,6 +29,10 @@ public class Pedido {
         this.idMesero = idMesero;
     }
 
+    public Pedido(int idPedido, int idMesa, int idMesero, int idProducto, java.util.Date fecha, boolean estado) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public int getIdPedido() {
         return idPedido;
     }
