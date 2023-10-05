@@ -1,7 +1,15 @@
 
+
 import AccesoData.ProductoData;
 import Entidades.Producto;
 import java.util.List;
+
+
+import AccesoData.ReservaData;
+import static AccesoData.ReservaData.consultarReservas;
+import java.util.List;
+
+
 
 /**
  * sql INSERT INTO `mesero`(`nombre`, `apellido`, `usuario`, `contraseña`,
@@ -67,9 +75,9 @@ import java.util.List;
  * los pedidos que cobro un mesero en particular en el día. ●	Listar los pedidos
  * que ha hecho una mesa en una fecha entre horas.
  */
-public class Main {
-
+public class Main {    
     public static void main(String[] args) {
+
 
         ProductoData pd = new ProductoData();
 
@@ -124,5 +132,13 @@ public class Main {
     
     
     
-}
+
+     
+        List<ReservaData> reservas = consultarReservas();
+        for (ReservaData reserva : reservas) {
+            System.out.println(reserva);
+    }
+
+    }
+
 }
