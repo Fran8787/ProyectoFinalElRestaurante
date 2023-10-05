@@ -14,12 +14,16 @@ import java.util.Date;
 import java.util.List;
 
 public class CobroData {
-   
+          private Connection con = null;
 
-    public static void insertarCobro(Cobro cobro) {
+    public CobroData() {
+        con = Conexion.getConexion();
+    }
+
+    public void insertarCobro(Cobro cobro) {
         try {
             String sql = "INSERT INTO cobro (id_pedido, id_mesero, id_mesa, fecha) VALUES (?, ?, ?, ?)";
-            try (PreparedStatement statement = Conexion.prepareStatement(sql)) {
+            try (PreparedStatement statement = con.prepareStatement(sql)) {
                 statement.setInt(1, cobro.getIdPedido());
                 statement.setInt(2, cobro.getIdMesero());
                 statement.setInt(3, cobro.getIdMesa());
@@ -31,10 +35,11 @@ public class CobroData {
         }
     }
 
-    public static void modificarCobro(Cobro cobro) {
-        try  {
+
+    public void modificarCobro(Cobro cobro) {
+        try {
             String sql = "UPDATE cobro SET id_pedido=?, id_mesero=?, id_mesa=?, fecha=? WHERE id_cobro=?";
-            try (PreparedStatement statement = Conexion.prepareStatement(sql)) {
+            try (PreparedStatement statement = con.prepareStatement(sql)) {
                 statement.setInt(1, cobro.getIdPedido());
                 statement.setInt(2, cobro.getIdMesero());
                 statement.setInt(3, cobro.getIdMesa());
@@ -47,10 +52,10 @@ public class CobroData {
         }
     }
 
-    public static void eliminarCobro(int idCobro) {
+    public void eliminarCobro(int idCobro) {
         try {
             String sql = "DELETE FROM cobro WHERE id_cobro=?";
-            try (PreparedStatement statement = Conexion.prepareStatement(sql)) {
+            try (PreparedStatement statement = con.prepareStatement(sql)) {
                 statement.setInt(1, idCobro);
                 statement.executeUpdate();
             }
@@ -59,11 +64,11 @@ public class CobroData {
         }
     }
 
-    public static List<Cobro> obtenerTodosLosCobros() {
+    public List<Cobro> obtenerTodosLosCobros() {
         List<Cobro> listaCobros = new ArrayList<>();
         try {
             String sql = "SELECT * FROM cobro";
-            try (PreparedStatement statement = Conexion.prepareStatement(sql);
+            try (PreparedStatement statement = con.prepareStatement(sql);
                  ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
                     int idCobro = resultSet.getInt("id_cobro");
@@ -82,5 +87,3 @@ public class CobroData {
         return listaCobros;
     }
 }
-    
-

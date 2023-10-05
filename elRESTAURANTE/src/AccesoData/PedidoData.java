@@ -22,10 +22,11 @@ import java.util.List;
 
 public class PedidoData {
     
-    public static void insertarPedido(Pedido pedido) {
+    public void insertarPedido(Pedido pedido) {
         try {
             String sql = "INSERT INTO pedidos (id_mesa, id_mesero, id_producto, fecha, estado) VALUES (?, ?, ?, ?, ?)";
-            try (PreparedStatement statement = Conexion.prepareStatement(sql)) {
+            try (Connection con = Conexion.getConexion();
+                 PreparedStatement statement = con.prepareStatement(sql)) {
                 statement.setInt(1, pedido.getIdMesa());
                 statement.setInt(2, pedido.getIdMesero());
                 statement.setInt(3, pedido.getIdProducto());
@@ -38,10 +39,11 @@ public class PedidoData {
         }
     }
 
-    public static void modificarPedido(Pedido pedido) {
-        try  {
+    public void modificarPedido(Pedido pedido) {
+        try {
             String sql = "UPDATE pedidos SET id_mesa=?, id_mesero=?, id_producto=?, fecha=?, estado=? WHERE id_pedido=?";
-            try (PreparedStatement statement = Conexion.prepareStatement(sql)) {
+            try (Connection con = Conexion.getConexion();
+                 PreparedStatement statement = con.prepareStatement(sql)) {
                 statement.setInt(1, pedido.getIdMesa());
                 statement.setInt(2, pedido.getIdMesero());
                 statement.setInt(3, pedido.getIdProducto());
@@ -55,10 +57,11 @@ public class PedidoData {
         }
     }
 
-    public static void eliminarPedido(int idPedido) {
+    public void eliminarPedido(int idPedido) {
         try {
             String sql = "DELETE FROM pedidos WHERE id_pedido=?";
-            try (PreparedStatement statement = Conexion.prepareStatement(sql)) {
+            try (Connection con = Conexion.getConexion();
+                 PreparedStatement statement = con.prepareStatement(sql)) {
                 statement.setInt(1, idPedido);
                 statement.executeUpdate();
             }
@@ -67,11 +70,12 @@ public class PedidoData {
         }
     }
 
-    public static List<Pedido> obtenerTodosLosPedidos() {
+    public List<Pedido> obtenerTodosLosPedidos() {
         List<Pedido> listaPedidos = new ArrayList<>();
         try {
             String sql = "SELECT * FROM pedidos";
-            try (PreparedStatement statement = Conexion.prepareStatement(sql);
+            try (Connection con = Conexion.getConexion();
+                 PreparedStatement statement = con.prepareStatement(sql);
                  ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
                     int idPedido = resultSet.getInt("id_pedido");

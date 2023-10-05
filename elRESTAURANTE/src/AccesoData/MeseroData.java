@@ -12,12 +12,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class MeseroData {
     
-    public static void insertarMesero(Mesero mesero) {
-        try  {
+    public void insertarMesero(Mesero mesero) {
+        try {
             String sql = "INSERT INTO meseros (nombre, apellido, usuario, contrasena) VALUES (?, ?, ?, ?)";
-            try (PreparedStatement statement = Conexion.prepareStatement(sql)) {
+            try (Connection con = Conexion.getConexion();
+                 PreparedStatement statement = con.prepareStatement(sql)) {
                 statement.setString(1, mesero.getNombre());
                 statement.setString(2, mesero.getApellido());
                 statement.setString(3, mesero.getUsuario());
@@ -29,10 +31,11 @@ public class MeseroData {
         }
     }
 
-    public static void modificarMesero(Mesero mesero) {
+    public void modificarMesero(Mesero mesero) {
         try {
             String sql = "UPDATE meseros SET nombre=?, apellido=?, usuario=?, contrasena=? WHERE id_mesero=?";
-            try (PreparedStatement statement = Conexion.prepareStatement(sql)) {
+            try (Connection con = Conexion.getConexion();
+                 PreparedStatement statement = con.prepareStatement(sql)) {
                 statement.setString(1, mesero.getNombre());
                 statement.setString(2, mesero.getApellido());
                 statement.setString(3, mesero.getUsuario());
@@ -45,10 +48,11 @@ public class MeseroData {
         }
     }
 
-    public static void eliminarMesero(int idMesero) {
-        try{
+    public void eliminarMesero(int idMesero) {
+        try {
             String sql = "DELETE FROM meseros WHERE id_mesero=?";
-            try (PreparedStatement statement = Conexion.prepareStatement(sql)) {
+            try (Connection con = Conexion.getConexion();
+                 PreparedStatement statement = con.prepareStatement(sql)) {
                 statement.setInt(1, idMesero);
                 statement.executeUpdate();
             }
@@ -57,11 +61,12 @@ public class MeseroData {
         }
     }
 
-    public static List<Mesero> obtenerTodosLosMeseros() {
+    public List<Mesero> obtenerTodosLosMeseros() {
         List<Mesero> listaMeseros = new ArrayList<>();
         try {
             String sql = "SELECT * FROM meseros";
-            try (PreparedStatement statement = Conexion.prepareStatement(sql);
+            try (Connection con = Conexion.getConexion();
+                 PreparedStatement statement = con.prepareStatement(sql);
                  ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
                     int idMesero = resultSet.getInt("id_mesero");

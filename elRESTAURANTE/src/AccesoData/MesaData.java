@@ -17,14 +17,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 public class MesaData {
-   
-
-    public static void insertarMesa(Mesa mesa) {
-        try  {
+    public void insertarMesa(Mesa mesa) {
+        try {
             String sql = "INSERT INTO mesas (capacidad, disponibilidad, atendida) VALUES (?, ?, ?)";
-            try (PreparedStatement statement = Conexion.prepareStatement(sql)) {
+            try (Connection con = Conexion.getConexion();
+                 PreparedStatement statement = con.prepareStatement(sql)) {
                 statement.setInt(1, mesa.getCapacidad());
                 statement.setBoolean(2, mesa.isDisponibilidad());
                 statement.setBoolean(3, mesa.isAtendida());
@@ -35,10 +33,11 @@ public class MesaData {
         }
     }
 
-    public static void modificarMesa(Mesa mesa) {
+    public void modificarMesa(Mesa mesa) {
         try {
             String sql = "UPDATE mesas SET capacidad=?, disponibilidad=?, atendida=? WHERE id_mesa=?";
-            try (PreparedStatement statement = Conexion.prepareStatement(sql)) {
+            try (Connection con = Conexion.getConexion();
+                 PreparedStatement statement = con.prepareStatement(sql)) {
                 statement.setInt(1, mesa.getCapacidad());
                 statement.setBoolean(2, mesa.isDisponibilidad());
                 statement.setBoolean(3, mesa.isAtendida());
@@ -50,10 +49,11 @@ public class MesaData {
         }
     }
 
-    public static void eliminarMesa(int idMesa) {
+    public void eliminarMesa(int idMesa) {
         try {
             String sql = "DELETE FROM mesas WHERE id_mesa=?";
-            try (PreparedStatement statement = Conexion.prepareStatement(sql)) {
+            try (Connection con = Conexion.getConexion();
+                 PreparedStatement statement = con.prepareStatement(sql)) {
                 statement.setInt(1, idMesa);
                 statement.executeUpdate();
             }
@@ -62,11 +62,12 @@ public class MesaData {
         }
     }
 
-    public static List<Mesa> obtenerTodasLasMesas() {
+    public List<Mesa> obtenerTodasLasMesas() {
         List<Mesa> listaMesas = new ArrayList<>();
-        try  {
+        try {
             String sql = "SELECT * FROM mesas";
-            try (PreparedStatement statement = Conexion.prepareStatement(sql);
+            try (Connection con = Conexion.getConexion();
+                 PreparedStatement statement = con.prepareStatement(sql);
                  ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
                     int idMesa = resultSet.getInt("id_mesa");
@@ -84,5 +85,3 @@ public class MesaData {
         return listaMesas;
     }
 }
-    
-
