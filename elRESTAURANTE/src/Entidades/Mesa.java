@@ -23,6 +23,10 @@ public class Mesa {
     public Mesa() {
     }
 
+    public Mesa(int idMesa, int capacidad, boolean disponibilidad, boolean atendida) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public int getIdMesa() {
         return idMesa;
     }
@@ -39,11 +43,11 @@ public class Mesa {
         this.capacidad = capacidad;
     }
 
-    public boolean isdiponibilidad() {
+    public boolean isDisponibilidad() {
         return diponibilidad;
     }
 
-    public void setDiponibilidad(boolean diponibilidad) {
+    public void setDisponibilidad(boolean diponibilidad) {
         this.diponibilidad = diponibilidad;
     }
 
