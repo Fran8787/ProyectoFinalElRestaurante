@@ -1,4 +1,9 @@
 
+import AccesoData.ReservaData;
+import static AccesoData.ReservaData.consultarReservas;
+import java.util.List;
+
+
 /**
  * INSTRUCTIVO: El proyecto será una aplicación en Java / MySQL. Se debe crear las tablas de la base de datos,
  * y las correspondientes clases. Utilice una clase para la conexión y confeccione la interfaz gráfica (GUI). 
@@ -49,10 +54,13 @@
  * ●	Listar los pedidos que cobro un mesero en particular en el día.
  * ●	Listar los pedidos que ha hecho una mesa en una fecha entre horas.
  */
-public class Main {
-
+public class Main {    
     public static void main(String[] args) {
-
+     
+        List<ReservaData> reservas = consultarReservas();
+        for (ReservaData reserva : reservas) {
+            System.out.println(reserva);
     }
 
+    }
 }

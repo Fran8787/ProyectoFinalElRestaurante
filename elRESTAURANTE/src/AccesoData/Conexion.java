@@ -17,6 +17,10 @@ public class Conexion {
     private static String USUARIO="root";
     private  static String PASSWORD="";
     private static Connection connection;
+
+    static Connection getConnection() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     
     private Conexion(){}
