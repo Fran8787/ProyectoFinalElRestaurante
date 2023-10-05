@@ -23,6 +23,10 @@ public class Cobro {
     public Cobro() {
     }
 
+    public Cobro(int idCobro, int idPedido, int idMesero, int idMesa, java.util.Date fecha) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public int getIdMesa() {
         return idMesa;
     }
