@@ -34,12 +34,12 @@ public class MenuDeProductos extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLPizzas = new javax.swing.JLabel();
+        jLLomos = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTablePREorder = new javax.swing.JTable();
         jLBebidas = new javax.swing.JLabel();
-        jLLomos = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jTextTOTAL = new javax.swing.JTextField();
@@ -69,17 +69,19 @@ public class MenuDeProductos extends javax.swing.JPanel {
         jPBACKfondo.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, 60, 50));
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Icono/Black_Russian_25489.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Icono/beer_drink_icon_146801.png"))); // NOI18N
         jLabel2.setOpaque(true);
         jLabel2.setPreferredSize(new java.awt.Dimension(55, 55));
         jPBACKfondo.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 280, 70, 50));
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Icono/pizza_food_icon_256962 (1).png"))); // NOI18N
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Icono/burger_food_icon_146845.png"))); // NOI18N
         jLabel4.setOpaque(true);
         jLabel4.setPreferredSize(new java.awt.Dimension(55, 55));
         jPBACKfondo.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 70, 50));
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Icono/taco_food_icon_256967 (1).png"))); // NOI18N
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Icono/32387taco_98856.png"))); // NOI18N
         jLabel6.setOpaque(true);
         jLabel6.setPreferredSize(new java.awt.Dimension(55, 55));
         jPBACKfondo.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, 60, 60));
@@ -105,13 +107,34 @@ public class MenuDeProductos extends javax.swing.JPanel {
         });
         jPBACKfondo.add(jLPizzas, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 130, 70));
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Icono/pizza_food_icon_256962 (1).png"))); // NOI18N
+        jLLomos.setBackground(new java.awt.Color(204, 204, 204));
+        jLLomos.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jLLomos.setForeground(new java.awt.Color(51, 51, 51));
+        jLLomos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLLomos.setText("Lomos & Hamburgesas");
+        jLLomos.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jLLomos.setOpaque(true);
+        jLLomos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLLomosMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLLomosMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLLomosMouseExited(evt);
+            }
+        });
+        jPBACKfondo.add(jLLomos, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 130, 70));
+
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Icono/32382hamburger_98925.png"))); // NOI18N
         jLabel7.setOpaque(true);
         jLabel7.setPreferredSize(new java.awt.Dimension(55, 55));
         jPBACKfondo.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 150, 60, 60));
 
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Icono/pizza_food_icon_256962 (1).png"))); // NOI18N
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Icono/recipepizzaicon_109877 (1).png"))); // NOI18N
         jLabel8.setOpaque(true);
         jLabel8.setPreferredSize(new java.awt.Dimension(55, 55));
         jPBACKfondo.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 70, 60));
@@ -160,26 +183,6 @@ public class MenuDeProductos extends javax.swing.JPanel {
             }
         });
         jPBACKfondo.add(jLBebidas, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, 130, 70));
-
-        jLLomos.setBackground(new java.awt.Color(204, 204, 204));
-        jLLomos.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jLLomos.setForeground(new java.awt.Color(51, 51, 51));
-        jLLomos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLLomos.setText("Lomos & Hamburgesas");
-        jLLomos.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jLLomos.setOpaque(true);
-        jLLomos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLLomosMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLLomosMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLLomosMouseExited(evt);
-            }
-        });
-        jPBACKfondo.add(jLLomos, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 130, 70));
 
         jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(51, 51, 51));
