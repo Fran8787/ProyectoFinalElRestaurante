@@ -6,7 +6,7 @@ import java.util.List;
 
 
 import AccesoData.ReservaData;
-import static AccesoData.ReservaData.consultarReservas;
+
 import java.util.List;
 
 
@@ -79,65 +79,6 @@ public class Main {
     public static void main(String[] args) {
 
 
-        ProductoData pd = new ProductoData();
-
-        //------------------------------------------------------------
-        Producto pro = new Producto("Hamburgesa de lentejaa", "Hamburguesas", 100, 10000, 1);
-        pd.guardarProducto(pro);
-
-        //------------------------------------------------------------
-      //  pd.eliminarProducto(54);
-
-        //------------------------------------------------------------
-        List<Producto> productos = pd.listarProductos();
-
-        for (Producto producto : productos) {
-            System.out.println("ID del Producto: " + producto.getIdProducto());
-            System.out.println("Nombre: " + producto.getNombre());
-            System.out.println("Categoría: " + producto.getCategoria());
-            System.out.println("Cantidad: " + producto.getCantidad());
-            System.out.println("Precio: " + producto.getPrecio());
-            System.out.println("Disponible: " + producto.getDisponible());
-            System.out.println("-----------------------------");
-        }
-    
-    //------------------------------------------------------------
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-     
-        List<ReservaData> reservas = consultarReservas();
-        for (ReservaData reserva : reservas) {
-            System.out.println(reserva);
-    }
 
     }
 

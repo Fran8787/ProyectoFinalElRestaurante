@@ -18,6 +18,16 @@ public class Reserva {
     public Reserva() {
     }
 
+    public Reserva(int idReserva, int idMesa, String nombre, int dni, LocalDate fecha, Time hora, boolean estado) {
+        this.idReserva = idReserva;
+        this.idMesa = idMesa;
+        this.nombre = nombre;
+        this.dni = dni;
+        this.fecha = fecha;
+        this.hora = hora;
+        this.estado = estado;
+    }
+
     public Reserva(int idMesa, String nombre, int dni, LocalDate fecha, Time hora, boolean estado) {
         this.idMesa = idMesa;
         this.nombre = nombre;
