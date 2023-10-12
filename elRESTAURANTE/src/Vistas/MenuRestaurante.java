@@ -344,7 +344,7 @@ public class MenuRestaurante extends javax.swing.JFrame {
          
       
         
-       MenuDeProductos p1= new MenuDeProductos();
+       CobrosPagos p1= new CobrosPagos();
         p1.setSize(1000, 440);
         p1.setLocation(0,0);
         
