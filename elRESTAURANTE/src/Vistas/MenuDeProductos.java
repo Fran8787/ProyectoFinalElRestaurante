@@ -39,15 +39,15 @@ public class MenuDeProductos extends javax.swing.JPanel {
         modeloDos = new DefaultTableModel();
         modeloTres= new DefaultTableModel();
         prodData = new ProductoData();
-        meData = new MeseroData();
-        pedData = new PedidoData();
-        mesaDat = new MesaData();
-        listaCinco = meData.obtenerTodosLosMeseros();
+//        meData = new MeseroData();
+//        pedData = new PedidoData();
+//        mesaDat = new MesaData();
+//        listaCinco = meData.obtenerTodosLosMeseros();
 //        listaCuatro = mesaDat.obtenerTodasLasMesas();
         armarCabezera();
         cargarPizzas();
         cargarTacos();
-        cargarMeseros();
+//        cargarMeseros();
 //        cargarMesas();
     }
     private void armarCabezera(){
@@ -119,13 +119,13 @@ public class MenuDeProductos extends javax.swing.JPanel {
             }
         setVisible(true);
     }
-    private void cargarMesas(){
-
-            for (Mesa mesa : listaCuatro) {
-            cBMesas.addItem("Mesa N°: "+mesa.getIdMesa());
-            }
-       
-    }
+//    private void cargarMesas(){
+//
+//            for (Mesa mesa : listaCuatro) {
+//            cBMesas.addItem("Mesa N°: "+mesa.getIdMesa());
+//            }
+//       
+//    }
 
     private void cargarMeseros(){
 
