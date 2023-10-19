@@ -1,14 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package AccesoData;
 
-/**
- *
- * @author Administrador
- */
+
 import Entidades.Mesa;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -18,6 +11,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 public class MesaData {
+    private Connection con = null;
+    
+    public MesaData() {
+        con = Conexion.getConexion();
+    }
+    
     public void insertarMesa(Mesa mesa) {
         try {
             String sql = "INSERT INTO mesas (capacidad, disponibilidad, atendida) VALUES (?, ?, ?)";
@@ -29,7 +28,7 @@ public class MesaData {
                 statement.executeUpdate();
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("error");
         }
     }
 
@@ -45,7 +44,7 @@ public class MesaData {
                 statement.executeUpdate();
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("error");
         }
     }
 
@@ -58,29 +57,28 @@ public class MesaData {
                 statement.executeUpdate();
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+           System.out.println("error");
         }
     }
 
     public List<Mesa> obtenerTodasLasMesas() {
         List<Mesa> listaMesas = new ArrayList<>();
         try {
-            String sql = "SELECT * FROM mesas";
-            try (Connection con = Conexion.getConexion();
-                 PreparedStatement statement = con.prepareStatement(sql);
-                 ResultSet resultSet = statement.executeQuery()) {
-                while (resultSet.next()) {
-                    int idMesa = resultSet.getInt("id_mesa");
-                    int capacidad = resultSet.getInt("capacidad");
-                    boolean disponibilidad = resultSet.getBoolean("disponibilidad");
-                    boolean atendida = resultSet.getBoolean("atendida");
-
+            String sql = "SELECT * FROM mesa";
+            
+                PreparedStatement ps = con.prepareStatement(sql);
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()) {
+                    int idMesa = rs.getInt("idMesa");
+                    int capacidad = rs.getInt("capacidad");
+                    boolean disponibilidad = rs.getBoolean("disponible");
+                    boolean atendida = rs.getBoolean("atendida");
                     Mesa mesa = new Mesa(idMesa, capacidad, disponibilidad, atendida);
                     listaMesas.add(mesa);
                 }
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+         catch (SQLException e) {
+            System.out.println("error");
         }
         return listaMesas;
     }

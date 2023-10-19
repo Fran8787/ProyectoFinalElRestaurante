@@ -331,7 +331,7 @@ public class MenuRestaurante extends javax.swing.JFrame {
     }//GEN-LAST:event_jLexitMouseEntered
 
     private void jLexitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLexitMouseClicked
-       JOptionPane.showMessageDialog(this, "");
+       JOptionPane.showMessageDialog(this, "Saliendo");
        System.exit(0);
     }//GEN-LAST:event_jLexitMouseClicked
 

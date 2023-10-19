@@ -50,14 +50,8 @@ public class ProductoData {
         JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Mesero: " + ex.getMessage());
     }
 } 
-    
-    
-    
-    
-    
-    
-    
- public void guardarProducto(Producto producto) {
+   
+    public void guardarProducto(Producto producto) {
         String sql = "INSERT INTO producto (nombre, categoria, precio, disponible, cantidad) VALUES (?, ?, ?, ?, ?)";
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -104,12 +98,64 @@ public class ProductoData {
         }
         return producto;
     }
+    public Producto buscarProductoNombre(String nombre){
+         Producto producto = null;
+    String sql = "SELECT * FROM producto WHERE nombre = ? AND disponible = 1";
+    PreparedStatement ps = null;
+    try {
+        ps = con.prepareStatement(sql);
+        ps.setString(1, nombre);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            producto = new Producto(
+                rs.getString("nombre"),
+                rs.getString("categoria"),
+                rs.getInt("cantidad"),
+                rs.getInt("precio"),
+                rs.getInt("disponible")
+            );
+            producto.setIdProducto(rs.getInt("idProducto"));
+        } else {
+            JOptionPane.showMessageDialog(null, "No existe el Producto");
+        }
+        ps.close();
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Producto: " + ex.getMessage());
+    }
+    return producto;
+    }
 
-    public List<Producto> listarProductos() {
+    public List<Producto> listarProductos(){
         List<Producto> productos = new ArrayList<>();
         try {
             String sql = "SELECT * FROM producto WHERE disponible = 1 AND cantidad > 0";
             PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Producto producto = new Producto(
+                    rs.getString("nombre"),
+                    rs.getString("categoria"),
+                    rs.getInt("cantidad"),
+                    rs.getInt("precio"),
+                    rs.getInt("disponible")
+                       
+                );
+                producto.setIdProducto(rs.getInt("idProducto"));
+                productos.add(producto);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Producto: " + ex.getMessage());
+        }
+        return productos;
+    }
+    
+    public List<Producto> listarProdxCategoria(String cat) {
+        List<Producto> productos = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM producto WHERE disponible = 1 AND cantidad > 0 AND categoria = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, cat);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Producto producto = new Producto(
