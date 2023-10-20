@@ -14,11 +14,11 @@ import java.util.Date;
 import java.util.List;
 
 public class PedidoData {
-    
+    Connection con = Conexion.getConexion();
     public void insertarPedido(Pedido pedido) {
         try {
             String sql = "INSERT INTO pedidos (id_mesa, id_mesero, id_producto, fecha, estado) VALUES (?, ?, ?, ?, ?)";
-            try (Connection con = Conexion.getConexion();
+            try (
                  PreparedStatement statement = con.prepareStatement(sql)) {
                 statement.setInt(1, pedido.getIdMesa());
                 statement.setInt(2, pedido.getIdMesero());
