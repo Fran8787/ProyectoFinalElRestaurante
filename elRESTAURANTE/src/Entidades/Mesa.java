@@ -5,14 +5,14 @@ public class Mesa {
     
     int idMesa;
     int capacidad;
-    boolean diponibilidad;
+    boolean disponible;
     boolean atendida;
 
 
 
-    public Mesa(int capacidad, boolean diponibilidad, boolean atendida) {
+    public Mesa(int capacidad, boolean disponible, boolean atendida) {
         this.capacidad = capacidad;
-        this.diponibilidad = diponibilidad;
+        this.disponible = disponible;
         this.atendida = atendida;
     }
 
@@ -23,7 +23,7 @@ public class Mesa {
     public Mesa() {
     }
 
-    public Mesa(int idMesa, int capacidad, boolean disponibilidad, boolean atendida) {
+    public Mesa(int idMesa, int capacidad, boolean disponible, boolean atendida) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -43,15 +43,15 @@ public class Mesa {
         this.capacidad = capacidad;
     }
 
-    public boolean isDisponibilidad() {
-        return diponibilidad;
+    public boolean getDisponible() {
+        return disponible;
     }
 
-    public void setDisponibilidad(boolean diponibilidad) {
-        this.diponibilidad = diponibilidad;
+    public void setDisponible(boolean disponible) {
+        this.disponible = disponible;
     }
 
-    public boolean isAtendida() {
+    public boolean getAtendida() {
         return atendida;
     }
 

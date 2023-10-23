@@ -43,12 +43,12 @@ public class MenuDeProductos extends javax.swing.JPanel {
         pedData = new PedidoData();
         mesaDat = new MesaData();
         listaCinco = meData.obtenerTodosLosMeseros();
-//        listaCuatro = mesaDat.obtenerTodasLasMesas();
+        listaCuatro = mesaDat.obtenerTodasLasMesas();
         armarCabezera();
         cargarPizzas();
         cargarTacos();
         cargarMeseros();
-//        cargarMesas();
+        cargarMesas();
     }
     private void armarCabezera(){
       
@@ -427,6 +427,11 @@ public class MenuDeProductos extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTUno.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTUnoMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTUno);
 
         jPBACKfondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, 240, 330));
@@ -442,6 +447,11 @@ public class MenuDeProductos extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTDos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTDosMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(jTDos);
 
         jPBACKfondo.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 80, 240, 330));
@@ -512,7 +522,8 @@ jLBebidas.setForeground(Color.black);
                     filaSeleccionada = jTDos.getSelectedRow();
                 if (filaSeleccionada != -1) { 
                     String valorPrimeraColumna = (String) jTDos.getValueAt(filaSeleccionada, 0);
-                    JOptionPane.showMessageDialog(this, "Valor de la primera columna: " + valorPrimeraColumna);
+                    idProd= prodData.buscarProductoNombre(valorPrimeraColumna).getIdProducto();
+                    JOptionPane.showMessageDialog(this, "Valor de la primera columna: " + idProd);
                 } else {
                     JOptionPane.showMessageDialog(this, "no seleccionaste ningun producto");
                 }
@@ -528,19 +539,22 @@ jLBebidas.setForeground(Color.black);
     }//GEN-LAST:event_jLSumaMouseExited
 
     private void jLResta1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLResta1MouseClicked
-       int filaSeleccionada = jTUno.getSelectedRow();
+int filaSeleccionada = jTUno.getSelectedRow();
+      int idProd;
                 if (filaSeleccionada != -1) { 
                     String valorPrimeraColumna = (String) jTUno.getValueAt(filaSeleccionada, 0);
-                    JOptionPane.showMessageDialog(this, "Valor de la primera columna: " + valorPrimeraColumna);
+                   idProd= prodData.buscarProductoNombre(valorPrimeraColumna).getIdProducto();
+                   JOptionPane.showMessageDialog(this, "Valor de la primera columna: " + idProd);
                 } else {
                     filaSeleccionada = jTDos.getSelectedRow();
                 if (filaSeleccionada != -1) { 
                     String valorPrimeraColumna = (String) jTDos.getValueAt(filaSeleccionada, 0);
-                    JOptionPane.showMessageDialog(this, "Valor de la primera columna: " + valorPrimeraColumna);
+                    idProd= prodData.buscarProductoNombre(valorPrimeraColumna).getIdProducto();
+                    JOptionPane.showMessageDialog(this, "Valor de la primera columna: " + idProd);
                 } else {
                     JOptionPane.showMessageDialog(this, "no seleccionaste ningun producto");
                 }
-                } 
+                }
     }//GEN-LAST:event_jLResta1MouseClicked
 
     private void jLResta1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLResta1MouseEntered
@@ -578,6 +592,14 @@ jLBebidas.setForeground(Color.black);
     private void cBMeseroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cBMeseroActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cBMeseroActionPerformed
+
+    private void jTDosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTDosMouseClicked
+        
+    }//GEN-LAST:event_jTDosMouseClicked
+
+    private void jTUnoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTUnoMouseClicked
+        
+    }//GEN-LAST:event_jTUnoMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

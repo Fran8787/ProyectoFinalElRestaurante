@@ -9,79 +9,101 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 
 public class MeseroData {
+    private Connection con = null;
+    
+    public MeseroData() {
+        con = Conexion.getConexion();
+    }
     
     public void insertarMesero(Mesero mesero) {
-        try {
-            String sql = "INSERT INTO meseros (nombre, apellido, usuario, contrasena) VALUES (?, ?, ?, ?)";
-            try (Connection con = Conexion.getConexion();
-                 PreparedStatement statement = con.prepareStatement(sql)) {
-                statement.setString(1, mesero.getNombre());
-                statement.setString(2, mesero.getApellido());
-                statement.setString(3, mesero.getUsuario());
-                statement.setString(4, mesero.getContraseña());
-                statement.executeUpdate();
+        
+        String sql = "INSERT INTO mesero (nombre, apellido, usuario, contraseña, estado) VALUES (?, ?, ?, ?, ?)";
+            try{
+                PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                ps.setString(1, mesero.getNombre());
+                ps.setString(2, mesero.getApellido());
+                ps.setString(3, mesero.getUsuario());
+                ps.setString(4, mesero.getContraseña());
+                ps.setBoolean(4, mesero.getEstado());
+                ps.executeUpdate();
+            ResultSet rs = ps.getGeneratedKeys();
+            if (rs.next()) {
+                mesero.setIdMesero(rs.getInt(1));
+                JOptionPane.showMessageDialog(null, "Mesero añadido con éxito.");
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+            }catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla mesero: " + ex.getMessage());
         }
     }
 
     public void modificarMesero(Mesero mesero) {
-        try {
-            String sql = "UPDATE meseros SET nombre=?, apellido=?, usuario=?, contrasena=? WHERE id_mesero=?";
-            try (Connection con = Conexion.getConexion();
-                 PreparedStatement statement = con.prepareStatement(sql)) {
-                statement.setString(1, mesero.getNombre());
-                statement.setString(2, mesero.getApellido());
-                statement.setString(3, mesero.getUsuario());
-                statement.setString(4, mesero.getContraseña());
-                statement.setInt(5, mesero.getIdMesero());
-                statement.executeUpdate();
+        
+            String sql = "UPDATE mesero SET nombre=?, apellido=?, usuario=?, contraseña=?, estado=? WHERE idMesero=?";
+            PreparedStatement ps = null;
+            try{
+                ps = con.prepareStatement(sql);
+                ps.setString(1, mesero.getNombre());
+                ps.setString(2, mesero.getApellido());
+                ps.setString(3, mesero.getUsuario());
+                ps.setString(4, mesero.getContraseña());
+                ps.setBoolean(5, mesero.getEstado());
+                ps.setInt(6, mesero.getIdMesero());
+                int exito = ps.executeUpdate();
+                if (exito == 1) {
+                JOptionPane.showMessageDialog(null, "Mesa modificada exitosamente.");
+            } else {
+                JOptionPane.showMessageDialog(null, "La mesa indicada no existe");
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+            }catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Error al acceder a la tabla mesa: " + ex.getMessage());
         }
+       
     }
 
     public void eliminarMesero(int idMesero) {
         try {
-            String sql = "DELETE FROM meseros WHERE id_mesero=?";
-            try (Connection con = Conexion.getConexion();
-                 PreparedStatement statement = con.prepareStatement(sql)) {
-                statement.setInt(1, idMesero);
-                statement.executeUpdate();
+            String sql = "UPDATE mesero SET disponible = 0 WHERE idMesero = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, idMesero);
+            int fila = ps.executeUpdate();
+            if (fila == 1) {
+                JOptionPane.showMessageDialog(null, "Se eliminó al mesero.");
             }
+            ps.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla mesero");
         }
     }
-
     public List<Mesero> obtenerTodosLosMeseros() {
-        List<Mesero> listaMeseros = new ArrayList<>();
+        List<Mesero> meseros = new ArrayList<>();
         try {
-            String sql = "SELECT * FROM meseros";
-            try (Connection con = Conexion.getConexion();
-                 PreparedStatement statement = con.prepareStatement(sql);
-                 ResultSet resultSet = statement.executeQuery()) {
-                while (resultSet.next()) {
-                    int idMesero = resultSet.getInt("id_mesero");
-                    String nombre = resultSet.getString("nombre");
-                    String apellido = resultSet.getString("apellido");
-                    String usuario = resultSet.getString("usuario");
-                    String contraseña = resultSet.getString("contraseña");
-
-                    Mesero mesero = new Mesero(idMesero, nombre, apellido, usuario, contraseña);
-                    listaMeseros.add(mesero);
-                }
+            String sql = "SELECT * FROM mesero WHERE estado = 1";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Mesero mesero = new Mesero(
+                    rs.getString("nombre"),
+                    rs.getString("apellido"),
+                    rs.getString("usuario"),  
+                    rs.getString("contraseña"),
+                    rs.getBoolean("estado")      
+                );
+                mesero.setIdMesero(rs.getInt("idMesero"));
+                meseros.add(mesero);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+            ps.close();
+            } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Mesero: " + ex.getMessage());
         }
-        return listaMeseros;
+        return meseros;
+        
     }
-}
+       
+    }

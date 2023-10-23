@@ -3,24 +3,16 @@ package Entidades;
 
 
 public class Mesero {
-    int idMesero;
-    String nombre;
-    String apellido;
-    String usuario;
-    String contraseña;
+    private int idMesero;
+    private String nombre;
+    private String apellido;
+    private String usuario;
+    private String contraseña;
+    private boolean estado;
 
-    public Mesero(String nombre, String apellido, String usuario, String contraseña) {
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.usuario = usuario;
-        this.contraseña = contraseña;
-    }
+   
 
     public Mesero() {
-    }
-
-    public Mesero(int idMesero, String nombre, String apellido, String usuario, String contrasena) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public int getIdMesero() {
@@ -62,13 +54,22 @@ public class Mesero {
     public void setContraseña(String contraseña) {
         this.contraseña = contraseña;
     }
-    
-    
-    
-    
-    
-    
-    
-    
-  
+
+    public boolean getEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+
+    public Mesero(String nombre, String apellido, String usuario, String contraseña, boolean estado) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.usuario = usuario;
+        this.contraseña = contraseña;
+        this.estado = estado;
+    }
+
+      
 }
