@@ -11,7 +11,6 @@ import Entidades.Pedido;
 import Entidades.Producto;
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -26,7 +25,7 @@ public class MenuDeProductos extends javax.swing.JPanel {
     }
     private List<Producto> listaUno;
     private List<Producto> listaDos;
-    private ArrayList<Producto> listaTres;
+    private List<Pedido> listaTres;
     private List<Mesa> listaCuatro;
     private List<Mesero> listaCinco;
     private MeseroData meData;
@@ -40,21 +39,16 @@ public class MenuDeProductos extends javax.swing.JPanel {
         modeloDos = new DefaultTableModel();
         modeloTres= new DefaultTableModel();
         prodData = new ProductoData();
-        meData = new MeseroData();
-        pedData = new PedidoData();
-        mesaDat = new MesaData();
-        listaCinco = meData.obtenerTodosLosMeseros();
-        listaCuatro = mesaDat.obtenerTodasLasMesas();
-        listaTres = new ArrayList<>();
+//        meData = new MeseroData();
+//        pedData = new PedidoData();
+//        mesaDat = new MesaData();
+//        listaCinco = meData.obtenerTodosLosMeseros();
+//        listaCuatro = mesaDat.obtenerTodasLasMesas();
         armarCabezera();
         cargarPizzas();
         cargarTacos();
-        cargarMeseros();
-        cargarMesas();
-        cajaUno.setText("Pizzas");
-        cajaDos.setText("Tacos");
-
-        
+//        cargarMeseros();
+//        cargarMesas();
     }
     private void armarCabezera(){
       
@@ -68,16 +62,6 @@ public class MenuDeProductos extends javax.swing.JPanel {
         jTDos.setModel(modeloDos);
         jTTres.setModel(modeloTres);
 
-    }
-    private void cargarPedido(){
-    modeloTres.setRowCount(0);
-                      
-             for (Producto m : listaTres) {
-                modeloTres.addRow(new Object[]{m.getNombre(), m.getPrecio()});
-            }
-        setVisible(true);
-    
-    
     }
     private void cargarPizzas() {
         
@@ -135,13 +119,13 @@ public class MenuDeProductos extends javax.swing.JPanel {
             }
         setVisible(true);
     }
-    private void cargarMesas(){
-
-            for (Mesa mesa : listaCuatro) {
-            cBMesas.addItem("Mesa N°: "+mesa.getIdMesa());
-            }
-       
-    }
+//    private void cargarMesas(){
+//
+//            for (Mesa mesa : listaCuatro) {
+//            cBMesas.addItem("Mesa N°: "+mesa.getIdMesa());
+//            }
+//       
+//    }
 
     private void cargarMeseros(){
 
@@ -177,6 +161,7 @@ public class MenuDeProductos extends javax.swing.JPanel {
         jLResta1 = new javax.swing.JLabel();
         cBMesas = new javax.swing.JComboBox<>();
         cBMesero = new javax.swing.JComboBox<>();
+        jLBorrar = new javax.swing.JLabel();
         jLabelTIcket = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTUno = new javax.swing.JTable();
@@ -279,29 +264,24 @@ public class MenuDeProductos extends javax.swing.JPanel {
         jTTres.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         jTTres.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {},
-                {},
-                {},
-                {},
-                {},
-                {},
-                {},
-                {},
-                {},
-                {},
-                {},
-                {},
-                {}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-
+                "Nombre", "Cantidad", "Precio"
             }
         ));
-        jTTres.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTTresMouseClicked(evt);
-            }
-        });
         jScrollPane2.setViewportView(jTTres);
 
         jPBACKfondo.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 100, 200, 180));
@@ -415,6 +395,24 @@ public class MenuDeProductos extends javax.swing.JPanel {
         });
         jPBACKfondo.add(cBMesero, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 70, 200, -1));
 
+        jLBorrar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLBorrar.setForeground(new java.awt.Color(51, 51, 51));
+        jLBorrar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLBorrar.setText("x");
+        jLBorrar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jLBorrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLBorrarMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLBorrarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLBorrarMouseExited(evt);
+            }
+        });
+        jPBACKfondo.add(jLBorrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 290, 20, 20));
+
         jLabelTIcket.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/receipt-template-with-barcode.jpg"))); // NOI18N
         jPBACKfondo.add(jLabelTIcket, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 0, 220, 420));
 
@@ -429,11 +427,6 @@ public class MenuDeProductos extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jTUno.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTUnoMouseClicked(evt);
-            }
-        });
         jScrollPane1.setViewportView(jTUno);
 
         jPBACKfondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, 240, 330));
@@ -449,22 +442,15 @@ public class MenuDeProductos extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jTDos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTDosMouseClicked(evt);
-            }
-        });
         jScrollPane3.setViewportView(jTDos);
 
         jPBACKfondo.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 80, 240, 330));
 
-        cajaUno.setFont(new java.awt.Font("Century Schoolbook", 3, 36)); // NOI18N
         cajaUno.setText("label1");
-        jPBACKfondo.add(cajaUno, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 30, 240, 40));
+        jPBACKfondo.add(cajaUno, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 30, 140, 30));
 
-        cajaDos.setFont(new java.awt.Font("Century Schoolbook", 3, 36)); // NOI18N
         cajaDos.setText("label2");
-        jPBACKfondo.add(cajaDos, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 30, 240, 40));
+        jPBACKfondo.add(cajaDos, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 30, 150, 30));
 
         add(jPBACKfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 430));
     }// </editor-fold>//GEN-END:initComponents
@@ -473,8 +459,6 @@ public class MenuDeProductos extends javax.swing.JPanel {
             
        cargarPizzas();
        cargarTacos();
-       cajaUno.setText("Pizzas");
-       cajaDos.setText("Tacos");
     }//GEN-LAST:event_jLPizzasMouseClicked
 
     private void jLPizzasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLPizzasMouseEntered
@@ -488,8 +472,6 @@ jLPizzas.setForeground(Color.black);
     private void jLLomosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLLomosMouseClicked
         cargarLomos();
         cargarHambur();  
-        cajaUno.setText("Lomos");
-        cajaDos.setText("Hamburguesas");
       
     }//GEN-LAST:event_jLLomosMouseClicked
 
@@ -503,15 +485,12 @@ jLPizzas.setForeground(Color.black);
 
     private void jLBebidasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBebidasMouseClicked
     cargarAlcohol();  
-    cargarSinAlcohol();
-    cajaUno.setText("Con Alcohol");
-    cajaDos.setText("Sin Alcohol");    
+    cargarSinAlcohol();    
         
     }//GEN-LAST:event_jLBebidasMouseClicked
 
     private void jLBebidasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBebidasMouseEntered
      jLBebidas.setForeground(Color.yellow);
-     
     }//GEN-LAST:event_jLBebidasMouseEntered
 
     private void jLBebidasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBebidasMouseExited
@@ -524,27 +503,20 @@ jLBebidas.setForeground(Color.black);
 
     private void jLSumaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLSumaMouseClicked
       int filaSeleccionada = jTUno.getSelectedRow();
-      Producto nuevoProd;
+      int idProd;
                 if (filaSeleccionada != -1) { 
                     String valorPrimeraColumna = (String) jTUno.getValueAt(filaSeleccionada, 0);
-                    nuevoProd= prodData.buscarProductoNombre(valorPrimeraColumna);
-                    
-                   listaTres.add(nuevoProd);
-                   JOptionPane.showMessageDialog(this, nuevoProd.getIdProducto());
-                   
+                   idProd= prodData.buscarProductoNombre(valorPrimeraColumna).getIdProducto();
+                   JOptionPane.showMessageDialog(this, "Valor de la primera columna: " + idProd);
                 } else {
                     filaSeleccionada = jTDos.getSelectedRow();
                 if (filaSeleccionada != -1) { 
                     String valorPrimeraColumna = (String) jTDos.getValueAt(filaSeleccionada, 0);
-                    
-                    nuevoProd= prodData.buscarProductoNombre(valorPrimeraColumna);
-                    JOptionPane.showMessageDialog(this, nuevoProd.getIdProducto());
-                    listaTres.add(nuevoProd);
+                    JOptionPane.showMessageDialog(this, "Valor de la primera columna: " + valorPrimeraColumna);
                 } else {
                     JOptionPane.showMessageDialog(this, "no seleccionaste ningun producto");
                 }
-                } 
-        cargarPedido();
+                }        
     }//GEN-LAST:event_jLSumaMouseClicked
 
     private void jLSumaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLSumaMouseEntered
@@ -556,17 +528,19 @@ jLBebidas.setForeground(Color.black);
     }//GEN-LAST:event_jLSumaMouseExited
 
     private void jLResta1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLResta1MouseClicked
-    
-        int filaSeleccionada = jTTres.getSelectedRow();
-    if (filaSeleccionada != -1) {
-        listaTres.remove(filaSeleccionada);
-       cargarPedido();
-        jTTres.revalidate();
-    } else {
-        JOptionPane.showMessageDialog(this, "No seleccionaste ningún producto a eliminar.");
-    } 
-    cajaUno.setText("Pizzas");
-    cajaDos.setText("Tacos");
+       int filaSeleccionada = jTUno.getSelectedRow();
+                if (filaSeleccionada != -1) { 
+                    String valorPrimeraColumna = (String) jTUno.getValueAt(filaSeleccionada, 0);
+                    JOptionPane.showMessageDialog(this, "Valor de la primera columna: " + valorPrimeraColumna);
+                } else {
+                    filaSeleccionada = jTDos.getSelectedRow();
+                if (filaSeleccionada != -1) { 
+                    String valorPrimeraColumna = (String) jTDos.getValueAt(filaSeleccionada, 0);
+                    JOptionPane.showMessageDialog(this, "Valor de la primera columna: " + valorPrimeraColumna);
+                } else {
+                    JOptionPane.showMessageDialog(this, "no seleccionaste ningun producto");
+                }
+                } 
     }//GEN-LAST:event_jLResta1MouseClicked
 
     private void jLResta1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLResta1MouseEntered
@@ -577,8 +551,20 @@ jLBebidas.setForeground(Color.black);
         jLResta1.setForeground(Color.black);
     }//GEN-LAST:event_jLResta1MouseExited
 
+    private void jLBorrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBorrarMouseClicked
+      
+    }//GEN-LAST:event_jLBorrarMouseClicked
+
+    private void jLBorrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBorrarMouseEntered
+       jLBorrar.setForeground(Color.green);
+    }//GEN-LAST:event_jLBorrarMouseEntered
+
+    private void jLBorrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBorrarMouseExited
+       jLBorrar.setForeground(Color.black);
+    }//GEN-LAST:event_jLBorrarMouseExited
+
     private void jLCargaPedidoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLCargaPedidoMouseClicked
-       //aqui coso para cargar pedidos xD
+        // TODO add your handling code here:
     }//GEN-LAST:event_jLCargaPedidoMouseClicked
 
     private void jLCargaPedidoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLCargaPedidoMouseEntered
@@ -593,22 +579,6 @@ jLBebidas.setForeground(Color.black);
         // TODO add your handling code here:
     }//GEN-LAST:event_cBMeseroActionPerformed
 
-    private void jTDosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTDosMouseClicked
-        jTUno.clearSelection();
-        jTTres.clearSelection();
-    }//GEN-LAST:event_jTDosMouseClicked
-
-    private void jTUnoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTUnoMouseClicked
-        jTDos.clearSelection();
-        jTTres.clearSelection();
-        
-    }//GEN-LAST:event_jTUnoMouseClicked
-
-    private void jTTresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTTresMouseClicked
-        jTDos.clearSelection();
-        jTUno.clearSelection();
-    }//GEN-LAST:event_jTTresMouseClicked
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cBMesas;
@@ -617,6 +587,7 @@ jLBebidas.setForeground(Color.black);
     private java.awt.Label cajaUno;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLBebidas;
+    private javax.swing.JLabel jLBorrar;
     private javax.swing.JLabel jLCargaPedido;
     private javax.swing.JLabel jLLomos;
     private javax.swing.JLabel jLPizzas;

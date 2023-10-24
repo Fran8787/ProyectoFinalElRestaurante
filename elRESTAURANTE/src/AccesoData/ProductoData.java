@@ -100,7 +100,7 @@ public class ProductoData {
     }
     public Producto buscarProductoNombre(String nombre){
          Producto producto = null;
-    String sql = "SELECT * FROM producto WHERE nombre = ?";
+    String sql = "SELECT * FROM producto WHERE nombre = ? AND disponible = 1";
     PreparedStatement ps = null;
     try {
         ps = con.prepareStatement(sql);
