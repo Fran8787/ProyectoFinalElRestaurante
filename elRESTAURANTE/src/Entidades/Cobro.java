@@ -1,30 +1,34 @@
 
 package Entidades;
 
+
 import java.sql.Date;
 
 
-public class Cobro {
-    int idCobro;
-    int idPedido;
-    int idMesero;
-    int idMesa;
-    Date fecha;
 
-    public Cobro(int idPedido, int idMesero, int idMesa, Date fecha, int total) {
+public class Cobro {
+    private int idCobro;
+    private int idPedido;
+    private int idMesero;
+    private int idMesa;
+    private Date fecha;
+    private double total;
+
+    public Cobro(int idCobro, int idPedido, int idMesero, int idMesa, Date fecha, double total) {
+        this.idCobro = idCobro;
         this.idPedido = idPedido;
         this.idMesero = idMesero;
         this.idMesa = idMesa;
         this.fecha = fecha;
         this.total = total;
     }
-    int total;
-
+       
     public Cobro() {
     }
-
-    public Cobro(int idCobro, int idPedido, int idMesero, int idMesa, java.util.Date fecha) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Cobro(int idPedido, int idMesero, double total) {
+        this.idPedido = idPedido;
+        this.idMesero = idMesero;
+        this.total = 0;
     }
 
     public int getIdMesa() {
@@ -43,11 +47,7 @@ public class Cobro {
         this.fecha = fecha;
     }
 
-    public Cobro(int idPedido, int idMesero, int total) {
-        this.idPedido = idPedido;
-        this.idMesero = idMesero;
-        this.total = total;
-    }
+    
 
     public int getIdCobro() {
         return idCobro;
@@ -73,21 +73,14 @@ public class Cobro {
         this.idMesero = idMesero;
     }
 
-    public int getTotal() {
+    public double getTotal() {
         return total;
     }
 
     public void setTotal(int total) {
         this.total = total;
     }
+
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-}
+            
+    }
