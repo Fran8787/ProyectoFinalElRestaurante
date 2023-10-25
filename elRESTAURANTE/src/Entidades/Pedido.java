@@ -6,12 +6,12 @@ import java.sql.Date;
 
 public class Pedido {
     
-    int idPedido;
-    int idMesa;
-    int idMesero;
-    int idProducto;
-    Date fecha;
-    boolean estado;
+    private int idPedido;
+    private int idMesa;
+    private int idMesero;
+    private int idProducto;
+    private Date fecha;
+    private boolean estado;
 
     public Pedido(int idMesa, int idMesero, int idProducto, Date fecha, boolean estado) {
         this.idMesa = idMesa;
